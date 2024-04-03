@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="/home/layout/head.html"></th:block>
+</head>
+
+<body>
+<div class="page-wraper">
+    <th:block th:insert="/home/layout/menu.html"></th:block>
+    <div class="page-content">
+        <!-- inner page banner -->
+        <div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+             style="background-image:url(assets/images/background/bg3.jpg);">
+            <div class="container">
+                <div class="dz-bnr-inr-entry">
+                    <h1>Cart</h1>
+                    <nav aria-label="breadcrumb" class="breadcrumb-row">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"> Home</a></li>
+                            <li class="breadcrumb-item">Cart</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- inner page banner End-->
+
+        <!-- contact area -->
+        <section class="content-inner shop-account">
+            <!-- Product -->
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table check-tbl">
+                                <thead>
+                                <tr>
+                                    <th>Images</th>
+                                    <th>Product name</th>
+                                    <th>Unit Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th class="text-end">Edit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="item:${shoppingCarts}">
+                                    <td class="product-item-img"><img th:src="@{|/uploads/${item.book.images}|}" alt="">
+                                    </td>
+                                    <td class="product-item-name" th:text="${item.book.bookName}"></td>
+                                    <td class="product-item-price" th:text="${item.book.price}"></td>
+                                    <form th:action="@{/user/edit-cart/{cartId}(cartId=${item.id})}" method="post">
+                                        <td class="product-item-quantity">
+                                            <div class="quantity btn-quantity style-1 me-3">
+                                                <input id="demo_vertical2" type="text" value="1" name="demo_vertical2"
+                                                       th:value="${item.orderQuantity}"/>
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal"><span class="amount"
+                                                                           th:text="${item.orderQuantity * item.book.price}"></span>
+                                        </td>
+                                        <td class="jb-product-remove">
+                                            <button type="submit"><i class="fa fa-edit" title="edit"></i></button>
+                                        </td>
+                                    </form>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="widget">
+                            <form class="shop-form">
+                                <h4 class="widget-title">Calculate Shipping</h4>
+                                <div class="form-group">
+                                    <select class="default-select">
+                                        <option selected>Credit Card Type</option>
+                                        <option value="1">Another option</option>
+                                        <option value="2">A option</option>
+                                        <option value="3">Potato</option>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <input type="text" class="form-control" placeholder="Credit Card Number">
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <input type="text" class="form-control" placeholder="Card Verification Number">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Coupon Code">
+                                </div>
+                                <div class="form-group">
+                                    <a href="shop-cart.html" class="btn btn-primary btn-hover" type="button">Apply
+                                        Coupon</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="widget">
+                            <h4 class="widget-title">Cart Subtotal</h4>
+                            <table class="table-bordered check-tbl m-b25">
+                                <tbody>
+                                <tr>
+                                    <td>Order Subtotal</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Shipping</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group m-b25">
+                                <a href="shop-checkout.html" class="btn btn-primary btn-hover" type="button">Proceed to
+                                    Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product END -->
+        </section>
+        <!-- contact area End-->
+
+    </div>
+    <th:block th:insert="/home/layout/footer-light.html"></th:block>
+    <button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
+</div>
+
+
+<!-- JAVASCRIPT FILES ========================================= -->
+<script th:src="@{/assets/js/jquery.min.js}"></script><!-- JQUERY MIN JS -->
+<script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script><!-- BOOTSTRAP MIN JS -->
+<script th:src="@{/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js}"></script>
+<!-- BOOTSTRAP SELECT MIN JS -->
+<script th:src="@{/assets/vendor/bootstrap-touchspin/bootstrap-touchspin.js}"></script><!-- BOOTSTRAP TOUCHSPIN JS -->
+<script th:src="@{/assets/js/dz.ajax.js}"></script><!-- AJAX -->
+<script th:src="@{/assets/js/custom.js}"></script><!-- CUSTOM JS -->
+<script th:src="@{/assets/vendor/wow/wow.min.js}"></script><!-- WOW JS -->
+</body>
+
+</html>
