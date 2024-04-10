@@ -34,7 +34,6 @@ public class User {
 
     private Boolean status;
 
-    @Column(unique = true)
     private String password;
 
     @Column(unique = true, length = 15)
